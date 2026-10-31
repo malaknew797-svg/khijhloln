@@ -1,0 +1,550 @@
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شاليمو | فاكهة من الخيال</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#1b5e43; --green2:#2e7d57; --light:#f4faf6; --cream:#fdf8ee; --body-bg:#5fcb9a;
+    --gold:#c9a24b; --dark:#123528;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
+  body{background:var(--body-bg);color:var(--dark)}
+  header{
+    background:linear-gradient(135deg,var(--green),var(--green2));
+    color:#fff;text-align:center;padding:50px 20px 90px;position:relative;overflow:hidden;
+  }
+  header::after{
+    content:"";position:absolute;bottom:-40px;right:0;left:0;height:90px;
+    background:var(--body-bg);border-radius:50% 50% 0 0/100% 100% 0 0;
+  }
+  .logo{font-size:56px;font-weight:900;letter-spacing:1px;text-shadow:0 4px 10px rgba(0,0,0,.25)}
+  .tagline{font-size:22px;color:#ffe9b0;margin-top:6px;font-weight:600}
+  .fruits{margin-top:16px;display:flex;justify-content:center;align-items:flex-end;flex-wrap:wrap;gap:10px}
+  .fruits img{height:54px;width:auto;filter:drop-shadow(0 8px 10px rgba(0,0,0,.3));animation:fruitFloat 3.2s ease-in-out infinite}
+  .fruits img:nth-child(2n){animation-duration:3.8s;animation-delay:.4s}
+  .fruits img:nth-child(3n){animation-duration:2.8s;animation-delay:.8s}
+  .fruits img:nth-child(5n){animation-duration:4.2s;animation-delay:.2s}
+  @keyframes fruitFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(4deg)}}
+  nav{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.08);
+    display:flex;gap:6px;overflow-x:auto;padding:10px 14px;white-space:nowrap;
+  }
+  nav a{
+    text-decoration:none;color:var(--green);font-weight:700;font-size:14px;
+    padding:8px 16px;border-radius:30px;border:1.5px solid #d8eadf;transition:.25s;flex-shrink:0;
+  }
+  nav a:hover{background:var(--green);color:#fff}
+  main{max-width:1100px;margin:0 auto;padding:20px 16px 60px}
+  .section{margin-top:34px;scroll-margin-top:70px}
+  .sec-title{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .sec-title .icon{font-size:30px}
+  .sec-title h2{
+    font-size:26px;font-weight:900;color:var(--green);
+    background:rgba(255,255,255,.65);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:8px 26px;border-radius:40px;
+    border:2px solid var(--green);box-shadow:4px 4px 0 var(--gold);
+  }
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .card{
+    background:rgba(255,255,255,.55);border-radius:16px;padding:16px 18px;
+    backdrop-filter:blur(10px) saturate(1.3);-webkit-backdrop-filter:blur(10px) saturate(1.3);
+    box-shadow:0 3px 10px rgba(18,53,40,.08);border:1px solid rgba(255,255,255,.7);
+    display:flex;justify-content:space-between;align-items:center;gap:10px;
+    transition:.25s;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 8px 18px rgba(18,53,40,.15)}
+  .card .name{font-weight:700;font-size:16px}
+  .card .desc{font-size:12.5px;color:#7a8a80;margin-top:3px;line-height:1.5}
+  .price{
+    background:var(--green);color:#fff;font-weight:900;font-size:15px;
+    min-width:52px;text-align:center;padding:6px 10px;border-radius:30px;flex-shrink:0;
+  }
+  .price.gold{background:var(--gold)}
+  .two{display:flex;gap:4px;flex-shrink:0;align-items:center}
+  .two .price{min-width:44px;font-size:13px}
+  .two .price span{display:block;font-size:10px;font-weight:600;opacity:.85}
+  .add-btn{
+    background:var(--green);color:#fff;border:none;cursor:pointer;
+    width:36px;height:36px;border-radius:50%;font-size:20px;font-weight:900;
+    flex-shrink:0;transition:.2s;line-height:1;
+  }
+  .add-btn:hover{background:var(--gold);transform:scale(1.1)}
+  .note{
+    margin-top:12px;background:rgba(253,248,238,.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px dashed var(--gold);
+    color:#8a6d1f;padding:10px 16px;border-radius:12px;font-size:14px;font-weight:600;text-align:center;
+  }
+  footer{
+    background:var(--dark);color:#cfe8da;text-align:center;padding:28px 16px;font-size:14px;
+  }
+  footer .logo-f{font-size:26px;font-weight:900;color:#fff}
+  /* ===== زرار السلة ===== */
+  .cart-fab{
+    position:fixed;bottom:20px;left:20px;z-index:99;
+    background:var(--green);color:#fff;border:none;cursor:pointer;
+    width:62px;height:62px;border-radius:50%;font-size:26px;
+    box-shadow:0 6px 16px rgba(0,0,0,.3);transition:.25s;
+  }
+  .cart-fab:hover{background:var(--gold);transform:scale(1.08)}
+  .cart-count{
+    position:absolute;top:-6px;right:-6px;background:var(--gold);color:#fff;
+    min-width:24px;height:24px;border-radius:12px;font-size:13px;font-weight:900;
+    display:flex;align-items:center;justify-content:center;padding:0 5px;
+  }
+  /* ===== نافذة السلة ===== */
+  .modal-bg{
+    display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:100;
+    align-items:flex-end;justify-content:center;
+  }
+  .modal-bg.open{display:flex}
+  .modal{
+    background:#fff;width:100%;max-width:500px;max-height:85vh;overflow-y:auto;
+    border-radius:24px 24px 0 0;padding:22px;animation:up .3s ease;
+  }
+  @keyframes up{from{transform:translateY(60px);opacity:0}to{transform:translateY(0);opacity:1}}
+  .modal h3{color:var(--green);font-size:22px;font-weight:900;margin-bottom:14px;text-align:center}
+  .cart-item{
+    display:flex;justify-content:space-between;align-items:center;gap:8px;
+    background:var(--light);border-radius:12px;padding:10px 12px;margin-bottom:8px;
+  }
+  .cart-item .ci-name{font-weight:700;font-size:15px}
+  .cart-item .ci-price{font-size:13px;color:#7a8a80}
+  .qty{display:flex;align-items:center;gap:8px}
+  .qty button{
+    width:28px;height:28px;border-radius:50%;border:none;cursor:pointer;
+    background:var(--green);color:#fff;font-size:16px;font-weight:900;line-height:1;
+  }
+  .qty button.minus{background:#c0392b}
+  .qty span{font-weight:900;min-width:18px;text-align:center}
+  .empty{text-align:center;color:#7a8a80;padding:24px;font-size:15px}
+  .total-row{
+    display:flex;justify-content:space-between;align-items:center;
+    border-top:2px dashed var(--gold);margin-top:12px;padding-top:12px;font-size:18px;font-weight:900;color:var(--green);
+  }
+  .send-btn{
+    width:100%;margin-top:14px;background:#25d366;color:#fff;border:none;cursor:pointer;
+    padding:14px;border-radius:14px;font-size:17px;font-weight:900;font-family:'Cairo',sans-serif;
+    display:flex;align-items:center;justify-content:center;gap:8px;transition:.25s;
+  }
+  .send-btn:hover{background:#1ebe5b;transform:translateY(-2px)}
+  .send-btn:disabled{background:#b9c8bf;cursor:not-allowed;transform:none}
+  .close-x{
+    position:sticky;top:0;float:left;background:#eee;border:none;width:32px;height:32px;
+    border-radius:50%;font-size:16px;cursor:pointer;color:#666;
+  }
+  .toast{
+    position:fixed;bottom:95px;left:50%;transform:translateX(-50%);
+    background:var(--dark);color:#fff;padding:10px 22px;border-radius:30px;
+    font-size:14px;font-weight:700;z-index:200;opacity:0;pointer-events:none;transition:.3s;
+  }
+  .toast.show{opacity:1}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<header>
+  <div class="logo">🍹 شاليمو</div>
+  <div class="tagline">✨ فاكهة من الخيال ✨</div>
+
+  </div>
+</header>
+
+<nav>
+  <a href="#fresh">غصاىْر فواكه مستورده</a>
+  <a href="#imported">عصائر مستوردة</a>
+  <a href="#cocktails">كوكتيلات</a>
+  <a href="#milkshake">ميلك شيك</a>
+  <a href="#yogurt">زبادي</a>
+  <a href="#avocado">أفوكادو</a>
+  <a href="#smoothie">سموزي</a>
+  <a href="#salad">سلطة فواكه</a>
+  <a href="#hot">مشروبات ساخنة</a>
+  <a href="#cold">مشروبات باردة</a>
+  <a href="#icecream">آيس كريم</a>
+  <a href="#rice">رز بلبن</a>
+  <a href="#waffles">وافلز</a>
+</nav>
+
+<main>
+
+  <!-- عصائر طازجة -->
+  <section class="section" id="fresh">
+    <div class="sec-title"><span class="icon">🍊</span><h2>عصائر فواكه مستوردة</h2></div>
+    <div class="grid">
+      <div class="card"><div><div class="name">تمر هندي 🍹</div></div><div class="two"><div class="price"><span>M</span>15</div><div class="price gold"><span>L</span>20</div>  <button class="add-btn" onclick="addItem('تمر هندي M',15)">m</button><button class="add-btn" onclick="addItem('تمر هندي L',20)">L</button></div></div>
+      <div class="card"><div><div class="name">عناب 🍇</div></div><div class="two"><div class="price"><span>M</span>15</div><div class="price gold"><span>L</span>20</div><button class="add-btn" onclick="addItem('عنب M',15)">m</button><button class="add-btn" onclick="addItem('عنب L',20)">L</button></div></div>
+      <div class="card"><div><div class="name">سوبيا 🍹</div></div><div class="two"><div class="price"><span>M</span>15</div><div class="price gold"><span>L</span>20</div><button class="add-btn" onclick="addItem('سويتا M',15)">m</button><button class="add-btn" onclick="addItem('سويتا L',20)">L</button></div></div>
+      <div class="card"><div><div class="name">كنتالوب 🍈</div></div><div class="two"><div class="price"><span>M</span>25</div><div class="price gold"><span>L</span>30</div><button class="add-btn" onclick="addItem('كنتالوب M',25)">m</button><button class="add-btn" onclick="addItem('كنتالوب L',30)">L</button></div></div>
+      <div class="card"><div><div class="name">فراولة 🍓</div></div><div class="two"><div class="price"><span>M</span>25</div><div class="price gold"><span>L</span>30</div><button class="add-btn" onclick="addItem('فراولة M',25)">m</button><button class="add-btn" onclick="addItem('فراولة L',30)">L</button></div></div>
+      <div class="card"><div><div class="name">جوافة 🍐</div></div><div class="two"><div class="price"><span>M</span>25</div><div class="price gold"><span>L</span>30</div><button class="add-btn" onclick="addItem('جوافة M',25)">m</button><button class="add-btn" onclick="addItem('جوافة L',30)">L</button></div></div>
+      <div class="card"><div><div class="name">برتقال 🍊</div></div><div class="two"><div class="price"><span>M</span>25</div><div class="price gold"><span>L</span>30</div><button class="add-btn" onclick="addItem('برتقال M',25)">m</button><button class="add-btn" onclick="addItem('برتقال L',30)">L</button></div></div>
+      <div class="card"><div><div class="name">ليمون 🍋</div></div><div class="two"><div class="price"><span>M</span>25</div><div class="price gold"><span>L</span>30</div><button class="add-btn" onclick="addItem('ليمون M',25)">m</button><button class="add-btn" onclick="addItem('ليمون L',30)">L</button></div></div>
+      <div class="card"><div><div class="name">موز 🍌</div></div><div class="two"><div class="price"><span>M</span>25</div><div class="price gold"><span>L</span>30</div><button class="add-btn" onclick="addItem('موز M',25)">m</button><button class="add-btn" onclick="addItem('موز L',30)">L</button></div></div>
+      <div class="card"><div><div class="name">بطيخ 🍉</div></div><div class="two"><div class="price"><span>M</span>25</div><div class="price gold"><span>L</span>30</div><button class="add-btn" onclick="addItem('بطيخ M',25)">m</button><button class="add-btn" onclick="addItem('بطيخ L',30)">L</button></div></div>
+      <div class="card"><div><div class="name">رمان ❤️</div></div><div class="two"><div class="price"><span>M</span>25</div><div class="price gold"><span>L</span>30</div><button class="add-btn" onclick="addItem('رمان M',25)">m</button><button class="add-btn" onclick="addItem('رمان L',30)">L</button></div></div>
+      <div class="card"><div><div class="name">مانجا 🥭</div></div><div class="two"><div class="price"><span>M</span>25</div><div class="price gold"><span>L</span>30</div><button class="add-btn" onclick="addItem('مانجا M',25)">m</button><button class="add-btn" onclick="addItem('مانجا L',30)">L</button></div></div>
+    </div>
+  </section>
+
+  <!-- مستوردة -->
+  <section class="section" id="imported">
+    <div class="sec-title"><span class="icon">✈️</span><h2>عصائر فواكه مستوردة</h2></div>
+    <div class="grid">
+      <div class="card"><div><div class="name">كيوي 🥝</div></div><div class="two"><div class="price">50</div><button class="add-btn" onclick="addItem('كيوي مستورد',50)">+</button></div></div>
+      <div class="card"><div><div class="name">توت 🫐</div></div><div class="two"><div class="price">50</div><button class="add-btn" onclick="addItem('توت مستورد',50)">+</button></div></div>
+      <div class="card"><div><div class="name">عنب مستورد 🍇</div></div><div class="two"><div class="price">50</div><button class="add-btn" onclick="addItem('عنب مستورد',50)">+</button></div></div>
+      <div class="card"><div><div class="name">أفوكادو 🥑</div></div><div class="two"><div class="price">60</div><button class="add-btn" onclick="addItem('أفوكادو مستورد',60)">+</button></div></div>
+      <div class="card"><div><div class="name">أناناس 🍍</div></div><div class="two"><div class="price">60</div><button class="add-btn" onclick="addItem('أناناس مستورد',60)">+</button></div></div>
+    </div>
+  </section>
+
+  <!-- كوكتيلات -->
+  <section class="section" id="cocktails">
+    <div class="sec-title"><span class="icon">🍸</span><h2>كوكتيلات شاليمو</h2></div>
+    <div class="grid">
+      <div class="card"><div><div class="name">كوكتيل شاليمو</div><div class="desc">مانجو - فراولة - جوافة - توت</div></div><div class="two"><div class="price">45</div><button class="add-btn" onclick="addItem('كوكتيل شاليمو',45)">+</button></div></div>
+      <div class="card"><div><div class="name">عوار القلب</div><div class="desc">فراولة - مانجو - توت - آيس كريم</div></div><div class="two"><div class="price">45</div><button class="add-btn" onclick="addItem('عوار القلب',45)">+</button></div></div>
+      <div class="card"><div><div class="name">أصفهاني</div><div class="desc">موز - مانجو - توت - آيس كريم</div></div><div class="two"><div class="price">45</div><button class="add-btn" onclick="addItem('أصفهاني',45)">+</button></div></div>
+      <div class="card"><div><div class="name">نص ضربة</div><div class="desc">فراولة - مانجو - كنتالوب - توت - موز</div></div><div class="two"><div class="price">45</div><button class="add-btn" onclick="addItem('تحفة ضريبة',45)">+</button></div></div>
+    </div>
+    <div class="note">🎨 اختر خلطتك الخاصة</div>
+  </section>
+
+  <!-- ميلك شيك -->
+  <section class="section" id="milkshake">
+    <div class="sec-title"><span class="icon">🥛</span><h2>ميلك شيك</h2></div>
+    <div class="grid">
+      <div class="card"><div><div class="name"> فاتيليا</div></div><div class="two"><div class="price">40</div><button class="add-btn" onclick="addItem('ميلك شيك هضا تيفي',40)">+</button></div></div>
+      <div class="card"><div><div class="name">فراوله</div></div><div class="two"><div class="price">40</div><button class="add-btn" onclick="addItem('ميلك شيك فروتة',40)">+</button></div></div>
+      <div class="card"><div><div class="name">أوريو</div></div><div class="two"><div class="price">40</div><button class="add-btn" onclick="addItem('ميلك شيك أوريو',40)">+</button></div></div>
+      <div class="card"><div><div class="name">شيكولاتة</div></div><div class="two"><div class="price">40</div><button class="add-btn" onclick="addItem('ميلك شيك شيكولاتة',40)">+</button></div></div>
+    </div>
+  </section>
+
+  <!-- زبادي -->
+  <section class="section" id="yogurt">
+    <div class="sec-title"><span class="icon">🍑</span><h2>زبادي شاليمو</h2></div>
+    <div class="grid">
+      <div class="card"><div><div class="name">زبادي مانجو 🥭</div></div><div class="two"><div class="price">35</div><button class="add-btn" onclick="addItem('زبادي مانجو',35)">+</button></div></div>
+      <div class="card"><div><div class="name">زبادي كنتالوب 🍈</div></div><div class="two"><div class="price">35</div><button class="add-btn" onclick="addItem('زبادي كنتالوب',35)">+</button></div></div>
+      <div class="card"><div><div class="name">زبادي خوخ 🍑</div></div><div class="two"><div class="price">35</div><button class="add-btn" onclick="addItem('زبادي خوخ',35)">+</button></div></div>
+      <div class="card"><div><div class="name">زبادي فراولة 🍓</div></div><div class="two"><div class="price">35</div><button class="add-btn" onclick="addItem('زبادي فراولة',35)">+</button></div></div>
+      <div class="card"><div><div class="name">زبادي عسل 🍯</div></div><div class="two"><div class="price">35</div><button class="add-btn" onclick="addItem('زبادي عسل',35)">+</button></div></div>
+      <div class="card"><div><div class="name">زبادي توت 🫐</div></div><div class="two"><div class="price">35</div><button class="add-btn" onclick="addItem('زبادي توت',35)">+</button></div></div>
+      <div class="card"><div><div class="name">زبادي موز 🍌</div></div><div class="two"><div class="price">35</div><button class="add-btn" onclick="addItem('زبادي موز',35)">+</button></div></div>
+    </div>
+    <div class="note">🎨   اختر خلطتك الخاصة بي 40ج</div>
+  </section>
+
+  <!-- أفوكادو -->
+  <section class="section" id="avocado">
+    <div class="sec-title"><span class="icon">🥑</span><h2>أفوكادو شاليمو</h2></div>
+    <div class="grid">
+      <div class="card"><div><div class="name">جباسكى</div><div class="desc">أفوكادو - مانجو - قطع موز - توت - مكرميل</div></div><div class="two"><div class="price">70</div><button class="add-btn" onclick="addItem('أفوكادو جلاسي',70)">+</button></div></div>
+      <div class="card"><div><div class="name">ميرال</div><div class="desc">أفوكادو - موز - قشطة - بلح - كراميل - سكر</div></div><div class="two"><div class="price">70</div><button class="add-btn" onclick="addItem('أفوكادو فيرال',70)">+</button></div></div>
+      <div class="card"><div><div class="name">فان ديزل</div><div class="desc">أفوكادو - مانجو - قشطة - توت - مكرميل</div></div><div class="two"><div class="price">70</div><button class="add-btn" onclick="addItem('أفوكادو فان ديزل',70)">+</button></div></div>
+      <div class="card"><div><div class="name">بيج رامى</div><div class="desc">أفوكادو - توت - مانجو - فراولة - جوز هند - مكرميل</div></div><div class="two"><div class="price">70</div><button class="add-btn" onclick="addItem('أفوكادو يمج رامي',70)">+</button></div></div>
+    </div>
+  </section>
+
+  <!-- سموزي -->
+  <section class="section" id="smoothie">
+    <div class="sec-title"><span class="icon">🥤</span><h2>عصائر السموزي</h2></div>
+    <div class="grid">
+      <div class="card"><div><div class="name">بطيخ 🍉</div></div><div class="two"><div class="price">35</div><button class="add-btn" onclick="addItem('سموزي بطيخ',35)">+</button></div></div>
+      <div class="card"><div><div class="name">مانجا 🥭</div></div><div class="two"><div class="price">35</div><button class="add-btn" onclick="addItem('سموزي مانجا',35)">+</button></div></div>
+      <div class="card"><div><div class="name">فراولة 🍓</div></div><div class="two"><div class="price">35</div><button class="add-btn" onclick="addItem('سموزي فراولة',35)">+</button></div></div>
+      <div class="card"><div><div class="name">خوخ 🍑</div></div><div class="two"><div class="price">35</div><button class="add-btn" onclick="addItem('سموزي خوخ',35)">+</button></div></div>
+      <div class="card"><div><div class="name">ليمون / نعناع 🍋🌿</div></div><div class="two"><div class="price">35</div><button class="add-btn" onclick="addItem('سموزي ليمون نعناع',35)">+</button></div></div>
+    </div>
+    <div class="note">🎨اختر خلطتك الخاصه بي 40ج</div>
+  </section>
+
+  <!-- ميكسات -->
+  <section class="section" id="mixes">
+    <div class="sec-title"><span class="icon">🍹</span><h2>ميكسات كابسل</h2></div>
+    <div class="grid">
+      <div class="card"><div><div class="name">موز / كنتالوب</div></div><div class="two"><div class="price">40</div><button class="add-btn" onclick="addItem('ميكس موز كنتالوب',40)">+</button></div></div>
+      <div class="card"><div><div class="name">سوداني / حليب</div></div><div class="two"><div class="price">40</div><button class="add-btn" onclick="addItem('ميكس سوداني حليب',40)">+</button></div></div>
+      <div class="card"><div><div class="name">مانجا / خوخ</div></div><div class="two"><div class="price">40</div><button class="add-btn" onclick="addItem('ميكس مانجا خوخ',40)">+</button></div></div>
+      <div class="card"><div><div class="name">مانجا / برتقال</div></div><div class="two"><div class="price">40</div><button class="add-btn" onclick="addItem('ميكس مانجا برتقال',40)">+</button></div></div>
+      <div class="card"><div><div class="name">بلح / حليب</div></div><div class="two"><div class="price">40</div><button class="add-btn" onclick="addItem('ميكس بلح حليب',40)">+</button></div></div>
+      <div class="card"><div><div class="name">رمان / توت</div></div><div class="two"><div class="price">40</div><button class="add-btn" onclick="addItem('ميكس رمان توت',40)">+</button></div></div>
+    </div>
+    <div class="note">🎨 اختر خلطتك الخاصةبي45</div>
+  </section>
+
+  <!-- سلطة فواكه -->
+  <section class="section" id="salad">
+    <div class="sec-title"><span class="icon">🥗</span><h2>سلطة فواكه</h2></div>
+    <div class="grid">
+      <div class="card"><div><div class="name">قنبلة 💣</div><div class="desc">قطع فاكهة - عصير مانجو - آيس كريم (بسبوسة)</div></div><div class="two"><div class="price">50</div><button class="add-btn" onclick="addItem('سلطة فواكه قنبلة',50)">+</button></div></div>
+      <div class="card"><div><div class="name">سلطة فواكه آيس كريم</div><div class="desc">قطع فاكهة - آيس كريم</div></div><div class="two"><div class="price">45</div><button class="add-btn" onclick="addItem('سلطة فواكه آيس كريم',45)">+</button></div></div>
+      <div class="card"><div><div class="name">سلطة فواكه سادة</div></div><div class="two"><div class="price">40</div><button class="add-btn" onclick="addItem('سلطة فواكه سادة',40)">+</button></div></div>
+    </div>
+  </section>
+
+  <!-- مشروبات ساخنة -->
+  <section class="section" id="hot">
+    <div class="sec-title"><span class="icon">☕</span><h2>مشروبات ساخنة</h2></div>
+    <div class="grid">
+      <div class="card"><div><div class="name">قهوة تركي</div></div><div class="two"><div class="price">15</div><button class="add-btn" onclick="addItem('قهوة تركي',15)">+</button></div></div>
+      <div class="card"><div><div class="name">قهوة فرنساوي</div></div><div class="two"><div class="price">20</div><button class="add-btn" onclick="addItem('قهوة فرنساوي',20)">+</button></div></div>
+      <div class="card"><div><div class="name">قهوة بندق</div></div><div class="two"><div class="price">20</div><button class="add-btn" onclick="addItem('قهوة بندق',20)">+</button></div></div>
+      <div class="card"><div><div class="name">كابتشينو</div></div><div class="two"><div class="price">20</div><button class="add-btn" onclick="addItem('كابتشينو',20)">+</button></div></div>
+      <div class="card"><div><div class="name">هوت شوكليت</div></div><div class="two"><div class="price">20</div><button class="add-btn" onclick="addItem('هوت شوكليت',20)">+</button></div></div>
+    </div>
+  </section>
+
+  <!-- مشروبات باردة -->
+  <section class="section" id="cold">
+    <div class="sec-title"><span class="icon">🧊</span><h2>مشروبات باردة</h2></div>
+    <div class="grid">
+      <div class="card"><div><div class="name">آيس كوفي</div></div><div class="two"><div class="price">30</div><button class="add-btn" onclick="addItem('آيس كوفي',30)">+</button></div></div>
+      <div class="card"><div><div class="name">آيس لاتيه</div></div><div class="two"><div class="price">35</div><button class="add-btn" onclick="addItem('آيس لاتيه',35)">+</button></div></div>
+      <div class="card"><div><div class="name">آيس موكا</div></div><div class="two"><div class="price">35</div><button class="add-btn" onclick="addItem('آيس موكا',35)">+</button></div></div>
+      <div class="card"><div><div class="name">آيس سبانش</div></div><div class="two"><div class="price">40</div><button class="add-btn" onclick="addItem('آيس سبانتش',40)">+</button></div></div>
+      <div class="card"><div><div class="name">آيس كابتشينو</div></div><div class="two"><div class="price">40</div><button class="add-btn" onclick="addItem('آيس كابتشينو',40)">+</button></div></div>
+    </div>
+  </section>
+
+  <!-- آيس كريم -->
+  <section class="section" id="icecream">
+    <div class="sec-title"><span class="icon">🍨</span><h2>آيس كريم</h2></div>
+    <div class="grid">
+      <div class="card"><div><div class="name">1 بودله</div></div><div class="two"><div class="price">10</div><button class="add-btn" onclick="addItem('آيس كريم بودله 1',10)">+</button></div></div>
+      <div class="card"><div><div class="name">2 بودله</div></div><div class="two"><div class="price">15</div><button class="add-btn" onclick="addItem('آيس كريم بودله 2',15)">+</button></div></div>
+      <div class="card"><div><div class="name">3 بودله</div></div><div class="two"><div class="price">20</div><button class="add-btn" onclick="addItem('آيس كريم بودله 3',20)">+</button></div></div>
+    </div>
+  </section>
+
+  <!-- رز بلبن -->
+  <section class="section" id="rice">
+    <div class="sec-title"><span class="icon">🍚</span><h2>رز بلبن</h2></div>
+    <div class="grid">
+      <div class="card"><div><div class="name">رز بلبن سادة</div></div><div class="two"><div class="price">15</div><button class="add-btn" onclick="addItem('رز بلبن سادة',15)">+</button></div></div>
+      <div class="card"><div><div class="name">رز بلبن نوتيلا</div></div><div class="two"><div class="price">30</div><button class="add-btn" onclick="addItem('رز بلبن نوتيلا',30)">+</button></div></div>
+      <div class="card"><div><div class="name">رز بلبن فواكه</div></div><div class="two"><div class="price">30</div><button class="add-btn" onclick="addItem('رز بلبن فواكه',30)">+</button></div></div>
+      <div class="card"><div><div class="name">رز بلبن فراولة</div></div><div class="two"><div class="price">30</div><button class="add-btn" onclick="addItem('رز بلبن فراولة',30)">+</button></div></div>
+      <div class="card"><div><div class="name">رز بلبن بسبوسة</div></div><div class="two"><div class="price">30</div><button class="add-btn" onclick="addItem('رز بلبن بسبوسة',30)">+</button></div></div>
+      <div class="card"><div><div class="name">رز بلبن آيس كريم</div></div><div class="two"><div class="price">30</div><button class="add-btn" onclick="addItem('رز بلبن آيس كريم',30)">+</button></div></div>
+      <div class="card"><div><div class="name">رز بلبن عسل مكسرات</div></div><div class="two"><div class="price">35</div><button class="add-btn" onclick="addItem('رز بلبن عسل مكسرات',35)">+</button></div></div>
+      <div class="card"><div><div class="name">رز بلبن لوتس</div></div><div class="two"><div class="price">35</div><button class="add-btn" onclick="addItem('رز بلبن لوتس',35)">+</button></div></div>
+      <div class="card"><div><div class="name">رز بلبن ميكس بستاشيو</div></div><div class="two"><div class="price gold">45</div><button class="add-btn" onclick="addItem('رز بلبن ميكس بستاشيو',45)">+</button></div></div>
+    </div>
+  </section>
+
+  <!-- وافلز -->
+  <section class="section" id="waffles">
+    <div class="sec-title"><span class="icon">🧇</span><h2>وافلز</h2></div>
+    <div class="grid">
+      <div class="card"><div><div class="name">وافلز نوتيلا</div></div><div class="two"><div class="price">50</div><button class="add-btn" onclick="addItem('وافلز نوتيلا',50)">+</button></div></div>
+      <div class="card"><div><div class="name">وافلز لوتس</div></div><div class="two"><div class="price">50</div><button class="add-btn" onclick="addItem('وافلز لوتس',50)">+</button></div></div>
+      <div class="card"><div><div class="name">وافلز نوتيلا آيس كريم</div></div><div class="two"><div class="price">60</div><button class="add-btn" onclick="addItem('وافلز نوتيلا آيس كريم',60)">+</button></div></div>
+      <div class="card"><div><div class="name">وافلز فواكه</div></div><div class="two"><div class="price">60</div><button class="add-btn" onclick="addItem('وافلز فواكه',60)">+</button></div></div>
+      <div class="card"><div><div class="name">وافلز بستاشيو</div></div><div class="two"><div class="price">65</div><button class="add-btn" onclick="addItem('وافلز بستاشيو',65)">+</button></div></div>
+      <div class="card"><div><div class="name">وافلز ميكس</div><div class="desc">نوتيلا - لوتس - فواكه - آيس كريم</div></div><div class="two"><div class="price gold">75</div><button class="add-btn" onclick="addItem('وافلز ميكس',75)">+</button></div></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="logo-f">🍹 شاليمو</div>
+
+  <h3>السعر فى متناول الايد </h3>
+  
+  <p style="margin-top:8px">للطلب: 📱 01098969016</p>
+</footer>
+
+<!-- زرار السلة -->
+<button class="cart-fab" onclick="openCart()">🛒<span class="cart-count" id="cartCount">0</span></button>
+<div class="toast" id="toast">تمت الإضافة ✓</div>
+
+<!-- نافذة السلة -->
+<div class="modal-bg" id="cartModal" onclick="if(event.target===this)closeCart()">
+  <div class="modal">
+    <button class="close-x" onclick="closeCart()">✖</button>
+    <h3>🛒 طلبك</h3>
+    <div id="cartItems"></div>
+    <div class="total-row"><span>الإجمالي</span><span id="cartTotal">0 جنيه</span></div>
+    <button class="send-btn" id="sendBtn" onclick="sendOrder()">📲 إرسال الطلب عبر واتساب</button>
+  </div>
+</div>
+
+<script>
+  let cart = [];
+
+  function addItem(name, price){
+    const found = cart.find(i => i.name === name);
+    if(found){ found.qty++; } else { cart.push({name, price, qty:1}); }
+  
+  // ===== خلفية متغيرة الألوان مع السكرول =====
+  const bgPalette = [
+    [95,203,154],  // نعناعي قوي (بداية الصفحة)
+    [252,208,95],  // أصفر مانجو
+    [250,165,92],  // برتقالي
+    [245,143,166], // وردي فراولة
+    [179,157,238], // بنفسجي عنب
+    [127,208,234]  // أزرق سماوي (نهاية الصفحة)
+  ];
+  let bgCur = bgPalette[0].slice();
+  let bgTarget = bgPalette[0].slice();
+
+  function bgOnScroll(){
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    const seg = bgPalette.length - 1;
+    const t = p * seg;
+    const i = Math.min(Math.floor(t), seg - 1);
+    const f = t - i;
+    bgTarget = bgPalette[i].map((c,k)=> Math.round(c + (bgPalette[i+1][k]-c)*f));
+  }
+
+  function bgAnimate(){
+    bgCur = bgCur.map((c,k)=> Math.round(c + (bgTarget[k]-c)*0.08));
+    const col = `rgb(${bgCur[0]},${bgCur[1]},${bgCur[2]})`;
+    document.body.style.backgroundColor = col;
+    document.documentElement.style.setProperty('--body-bg', col);
+    requestAnimationFrame(bgAnimate);
+  }
+
+  window.addEventListener('scroll', bgOnScroll, {passive:true});
+  bgOnScroll();
+  requestAnimationFrame(bgAnimate);
+
+  updateCartUI();
+    showToast();
+  }
+
+  function changeQty(name, d){
+    const item = cart.find(i => i.name === name);
+    if(!item) return;
+    item.qty += d;
+    if(item.qty <= 0){ cart = cart.filter(i => i.name !== name); }
+  
+  // ===== خلفية متغيرة الألوان مع السكرول =====
+  const bgPalette = [
+    [95,203,154],  // نعناعي قوي (بداية الصفحة)
+    [252,208,95],  // أصفر مانجو
+    [250,165,92],  // برتقالي
+    [245,143,166], // وردي فراولة
+    [179,157,238], // بنفسجي عنب
+    [127,208,234]  // أزرق سماوي (نهاية الصفحة)
+  ];
+  let bgCur = bgPalette[0].slice();
+  let bgTarget = bgPalette[0].slice();
+
+  function bgOnScroll(){
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    const seg = bgPalette.length - 1;
+    const t = p * seg;
+    const i = Math.min(Math.floor(t), seg - 1);
+    const f = t - i;
+    bgTarget = bgPalette[i].map((c,k)=> Math.round(c + (bgPalette[i+1][k]-c)*f));
+  }
+
+  function bgAnimate(){
+    bgCur = bgCur.map((c,k)=> Math.round(c + (bgTarget[k]-c)*0.08));
+    const col = `rgb(${bgCur[0]},${bgCur[1]},${bgCur[2]})`;
+    document.body.style.backgroundColor = col;
+    document.documentElement.style.setProperty('--body-bg', col);
+    requestAnimationFrame(bgAnimate);
+  }
+
+  window.addEventListener('scroll', bgOnScroll, {passive:true});
+  bgOnScroll();
+  requestAnimationFrame(bgAnimate);
+
+  updateCartUI();
+  }
+
+  function updateCartUI(){
+    const count = cart.reduce((s,i)=>s+i.qty,0);
+    const total = cart.reduce((s,i)=>s+i.qty*i.price,0);
+    document.getElementById('cartCount').textContent = count;
+    document.getElementById('cartTotal').textContent = total + ' جنيه';
+    document.getElementById('sendBtn').disabled = count === 0;
+
+    const box = document.getElementById('cartItems');
+    if(cart.length === 0){
+      box.innerHTML = '<div class="empty">سلتك فاضية.. اختار من المنيو 🍹</div>';
+      return;
+    }
+    box.innerHTML = cart.map(i => `
+      <div class="cart-item">
+        <div>
+          <div class="ci-name">${i.name}</div>
+          <div class="ci-price">${i.price} جنيه × ${i.qty} = ${i.price*i.qty} جنيه</div>
+        </div>
+        <div class="qty">
+          <button onclick="changeQty('${i.name}',1)">+</button>
+          <span>${i.qty}</span>
+          <button class="minus" onclick="changeQty('${i.name}',-1)">−</button>
+        </div>
+      </div>`).join('');
+  }
+
+  function openCart(){ document.getElementById('cartModal').classList.add('open'); }
+  function closeCart(){ document.getElementById('cartModal').classList.remove('open'); }
+
+  function sendOrder(){
+    const total = cart.reduce((s,i)=>s+i.qty*i.price,0);
+    let msg = '🍹 طلب جديد من منيو شاليمو:%0A%0A';
+    cart.forEach(i => {
+      msg += `▪ ${i.name}%0A  الكمية: ${i.qty} × ${i.price} = ${i.qty*i.price} جنيه%0A`;
+    });
+    msg += `%0A💰 الإجمالي: ${total} جنيه`;
+    window.open('https://wa.me/201098969016?text=' + msg, '_blank');
+  }
+
+  let toastTimer;
+  function showToast(){
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=>t.classList.remove('show'), 1200);
+  }
+
+
+  // ===== خلفية متغيرة الألوان مع السكرول =====
+  const bgPalette = [
+    [95,203,154],  // نعناعي قوي (بداية الصفحة)
+    [252,208,95],  // أصفر مانجو
+    [250,165,92],  // برتقالي
+    [245,143,166], // وردي فراولة
+    [179,157,238], // بنفسجي عنب
+    [127,208,234]  // أزرق سماوي (نهاية الصفحة)
+  ];
+  let bgCur = bgPalette[0].slice();
+  let bgTarget = bgPalette[0].slice();
+
+  function bgOnScroll(){
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    const seg = bgPalette.length - 1;
+    const t = p * seg;
+    const i = Math.min(Math.floor(t), seg - 1);
+    const f = t - i;
+    bgTarget = bgPalette[i].map((c,k)=> Math.round(c + (bgPalette[i+1][k]-c)*f));
+  }
+
+  function bgAnimate(){
+    bgCur = bgCur.map((c,k)=> Math.round(c + (bgTarget[k]-c)*0.08));
+    const col = `rgb(${bgCur[0]},${bgCur[1]},${bgCur[2]})`;
+    document.body.style.backgroundColor = col;
+    document.documentElement.style.setProperty('--body-bg', col);
+    requestAnimationFrame(bgAnimate);
+  }
+
+  window.addEventListener('scroll', bgOnScroll, {passive:true});
+  bgOnScroll();
+  requestAnimationFrame(bgAnimate);
+
+  updateCartUI();
+</script>
+
+</body>
+</html>
